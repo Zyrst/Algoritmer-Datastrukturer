@@ -1,8 +1,6 @@
 #include <vector>
 #include <iostream>
 
-
-
 void bucketSort(std::vector<int> v)
 {
 	int biggestValue = 0;
@@ -12,13 +10,13 @@ void bucketSort(std::vector<int> v)
 	{
 		if (i == 0)
 			biggestValue = v[i];
+			 
 
 		else if (v[i] > biggestValue && i > 0)
 		{
 			biggestValue = v[i];
 		}		 
 	}
-
 	// Skapar ny vector. 
 	std::vector<int> newBucket;
 	//Fyller alla utom sista elementet med 0
@@ -37,8 +35,7 @@ void bucketSort(std::vector<int> v)
 	for (auto k : newBucket)
 	{
 		std::cout << k << std::endl;
-	}
-		
+	}		
 }
 
 int main()
