@@ -1,5 +1,25 @@
 #include <vector>
 #include <iostream>
+void insertionSort(std::vector<int> v)
+{
+	// Shitty sortering på 
+	for(int i = 1; i < v.size(); i++)
+	{
+		if(v[i] > v[i - 1])
+		{
+			swap(v[i], v[i - 1])
+			if( i != 0)
+				i--;
+		}
+	}
+	for(auto i : v)
+	{
+		std::cout << i << std::endl;
+	}
+}
+
+
+
 
 void bucketSort(std::vector<int> v)
 {
