@@ -1,17 +1,22 @@
 #include <vector>
 #include <iostream>
+#include <algorithm>
 void insertionSort(std::vector<int> v)
 {
-	// Shitty sortering på 
-	for(int i = 1; i < v.size(); i++)
+	// Shitty sortering
+	//while (!std::is_sorted(v.begin(), v.end()))
+	for (int i = 1; i < v.size(); i++)
 	{
-		if(v[i] > v[i - 1])
+		for (int i = 1; i < v.size(); i++)
 		{
-			swap(v[i], v[i - 1])
-			if( i != 0)
-				i--;
+			if (v[i] < v[i - 1])
+			{
+				std::swap(v[i - 1], v[i]);
+				if (i > 0)
+					i--;
+			}
 		}
-	}
+	}	
 	for(auto i : v)
 	{
 		std::cout << i << std::endl;
@@ -61,6 +66,7 @@ void bucketSort(std::vector<int> v)
 int main()
 {
 	std::vector<int> unsorted = { 5, 6, 4, 3, 2, 1, 0, 2, 1 };
-	bucketSort(unsorted);
+	//bucketSort(unsorted);
+	insertionSort(unsorted);
 	getchar();
 }
