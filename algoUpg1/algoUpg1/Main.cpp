@@ -1,8 +1,32 @@
 #include <vector>
 #include <iostream>
 #include <algorithm>
-void insertionSort(std::vector<int> v)
+#include <cstdlib>
+#include <ctime>
+#include <chrono>
+
+// For extensive tests.
+std::vector<int> createVector(int numbOfPosts)
 {
+	std::vector<int> v;
+	srand(time(NULL));
+	for (int i = 0; i < numbOfPosts; i++)
+	{		
+		v.push_back(rand() % numbOfPosts + 1);
+	}
+	return v;
+}
+
+
+/* Different sort algorithms 
+ * returns the time it took to sort (NOT including print time.). */
+
+
+double insertionSort(std::vector<int> v)
+{	
+	double timeToComplete;
+
+	std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
 	// Shitty sortering
 	//while (!std::is_sorted(v.begin(), v.end()))
 	for (int i = 1; i < v.size(); i++)
@@ -17,18 +41,20 @@ void insertionSort(std::vector<int> v)
 			}
 		}
 	}	
-	for(auto i : v)
-	{
-		std::cout << i << std::endl;
-	}
+	std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+	//for(auto i : v)
+	//{
+	//	std::cout << i << std::endl;
+	//}
+
+	return  timeToComplete = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
 }
 
-
-
-
-void bucketSort(std::vector<int> v)
+double bucketSort(std::vector<int> v)
 {
 	int biggestValue = 0;
+	double timeToComplete;
+	std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
 	// Hittar största värde. 
 	// dvs. K	
 	for (int i = 0; i < v.size(); i++)
@@ -56,17 +82,18 @@ void bucketSort(std::vector<int> v)
 		// Värdet i v blir en position i newBucket.
 		newBucket[v[i]]++; 
 	}
-	
-	for (auto k : newBucket)
-	{
-		std::cout << k << std::endl;
-	}		
+	std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+	//for (auto k : newBucket)
+	//{
+	//	std::cout << k << std::endl;
+	//}
+	return  timeToComplete = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
 }
+
 
 int main()
 {
-	std::vector<int> unsorted = { 5, 6, 4, 3, 2, 1, 0, 2, 1 };
-	//bucketSort(unsorted);
-	insertionSort(unsorted);
+	std::cout << "Time to sort 1300 items with insertion sort 0." << insertionSort(createVector(1300)) << "s" << std::endl;
+	std::cout << "Time to sort 1300 items with bucket sort 0." << bucketSort(createVector(1300)) << "s";
 	getchar();
 }
