@@ -93,7 +93,13 @@ double bucketSort(std::vector<int> v)
 
 int main()
 {
-	std::cout << "Time to sort 1300 items with insertion sort 0." << insertionSort(createVector(1300)) << "s" << std::endl;
-	std::cout << "Time to sort 1300 items with bucket sort 0." << bucketSort(createVector(1300)) << "s";
+	for (int i = 0; i <= 20; i++)
+	{
+		int numOfItems = 1000 + (i * 100);
+		std::cout << "Time to sort " << numOfItems << " items with insertion sort 0." << insertionSort(createVector(numOfItems)) << "s" << std::endl;
+		//std::cout << "Time to sort " << numOfItems << " items with bucket sort 0." << bucketSort(createVector(numOfItems)) << "s";
+	}
+
+	
 	getchar();
 }
