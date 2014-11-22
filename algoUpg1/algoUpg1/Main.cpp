@@ -47,7 +47,7 @@ double insertionSort(std::vector<int> v)
 	//	std::cout << i << std::endl;
 	//}
 
-	return  timeToComplete = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
+	return  timeToComplete = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
 }
 
 double bucketSort(std::vector<int> v)
@@ -96,7 +96,7 @@ int main()
 	for (int i = 0; i <= 20; i++)
 	{
 		int numOfItems = 1000 + (i * 100);
-		std::cout << "Time to sort " << numOfItems << " items with insertion sort 0." << insertionSort(createVector(numOfItems)) << "s" << std::endl;
+		std::cout << "Time to sort " << numOfItems << " items with insertion sort " << insertionSort(createVector(numOfItems)) << "ms" << std::endl;
 		//std::cout << "Time to sort " << numOfItems << " items with bucket sort 0." << bucketSort(createVector(numOfItems)) << "s";
 	}
 
