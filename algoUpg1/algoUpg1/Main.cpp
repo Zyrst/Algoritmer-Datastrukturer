@@ -42,11 +42,6 @@ double insertionSort(std::vector<int> v)
 		}
 	}	
 	std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
-	//for(auto i : v)
-	//{
-	//	std::cout << i << std::endl;
-	//}
-
 	return  timeToComplete = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
 }
 
@@ -83,21 +78,19 @@ double bucketSort(std::vector<int> v)
 		newBucket[v[i]]++; 
 	}
 	std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
-	//for (auto k : newBucket)
-	//{
-	//	std::cout << k << std::endl;
-	//}
 	return  timeToComplete = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
 }
 
 
 int main()
 {
-	for (int i = 0; i <= 20; i++)
+	std::cout << "Items\tInsertionSort\tBucketSort" << std::endl;
+	for (int i = 0; i <= 40; i++)
 	{
-		int numOfItems = 1000 + (i * 100);
-		std::cout << "Time to sort " << numOfItems << " items with insertion sort " << insertionSort(createVector(numOfItems)) << "ms" << std::endl;
-		//std::cout << "Time to sort " << numOfItems << " items with bucket sort 0." << bucketSort(createVector(numOfItems)) << "s";
+		int numOfItems = 1000 + (i * 200);
+		std::cout << numOfItems << "\t\t";
+		std::cout << insertionSort(createVector(numOfItems)) << "ms\t";
+		std::cout << bucketSort(createVector(numOfItems)) << "ms" << std::endl;
 	}
 
 	
