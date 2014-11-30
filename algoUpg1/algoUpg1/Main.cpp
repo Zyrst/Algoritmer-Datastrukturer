@@ -88,8 +88,8 @@ int main()
 	for (int i = 0; i <= 40; i++)
 	{
 		int numOfItems = 1000 + (i * 200);
-		std::cout << numOfItems << "\t\t";
-		std::cout << insertionSort(createVector(numOfItems)) << "ms\t";
+		std::cout << numOfItems << "\t";
+		std::cout << insertionSort(createVector(numOfItems)) << "ms\t\t";
 		std::cout << bucketSort(createVector(numOfItems)) << "ms" << std::endl;
 	}
 
