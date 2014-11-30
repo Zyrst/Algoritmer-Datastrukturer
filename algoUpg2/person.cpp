@@ -42,12 +42,18 @@ void Person::addToUnfriend(Person* person)
 	if(person == this)
 		return;
 
+	// We can't add the same enemy twice.
+	for(auto p : enemies)
+		if(person == p)
+			return;
+
 	// Removes from friends. (Seems obvious)
 	for(auto persons : friends)
 		if(persons == person)
-			removeFriend(person);
+			removeFriend(person);	
 
 	enemies.push_back(person);
+	person.addToUnfriend(this);
 }
 
 void Person::removeUnfriend(Person* person)
