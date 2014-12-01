@@ -15,6 +15,11 @@ void Person::addFriend(Person* person)
 	if(person == this)
 		return;
 
+	// We can't add the same friends twice.
+	for(auto p : friends)
+		if(person == p)
+			return;
+
 	// We can't add a person that is on our unfriend list.
 	for(auto persons : enemies)
 		if(persons == person)
@@ -71,7 +76,7 @@ void Person::enemyOfMyEnemy()
 	for(auto i : enemies)
 	{
 		for(auto k : i->getEnemies())
-			friends.push_back(k);
+			addFriend(k);
 	}
 }
 
@@ -79,8 +84,8 @@ void Person::enemyOfMyFriend()
 {
 	for(auto i : friends)
 		for(auto k : i->getEnemies())
-			enemies.push_back(k);
-}
+			addToUnfriend(k);
+	}
 
 std::vector<Person*> Person::getEnemies()
 {

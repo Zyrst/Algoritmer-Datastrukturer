@@ -22,9 +22,7 @@ public:
 	//String methods
 	void printFriends();
 	void printEnemies();
-	std::string getName();
 
-private:
 	std::string mName;
 	std::vector<Person*> friends;
 	std::vector<Person*> enemies; 
