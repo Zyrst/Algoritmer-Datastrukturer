@@ -20,12 +20,12 @@ public:
 	std::vector<Person*> getFriends();
 	std::vector<Person*> getEnemies();
 	//String methods
-	std::string printFriends();
-	std::string printUnfriends();
+	void printFriends();
+	void printEnemies();
 	std::string getName();
 
 private:
 	std::string mName;
 	std::vector<Person*> friends;
 	std::vector<Person*> enemies; 
-}
+};

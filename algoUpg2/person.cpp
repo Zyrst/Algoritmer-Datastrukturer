@@ -53,7 +53,7 @@ void Person::addToUnfriend(Person* person)
 			removeFriend(person);	
 
 	enemies.push_back(person);
-	person.addToUnfriend(this);
+	person->addToUnfriend(this);
 }
 
 void Person::removeUnfriend(Person* person)
@@ -92,15 +92,15 @@ std::vector<Person*> Person::getFriends()
 	return friends;
 }
 
-std::string Person::printFriends()
+void Person::printFriends()
 {
 	for(auto i : friends)
-		std::cout << i->getName() << std::end;
+		std::cout << i->getName() << std::endl;
 }
 
-std::string Person::printEnemies()
+void Person::printEnemies()
 {
-	for(auto i : enemies)
+	for(auto k : enemies)
 		std::cout << k->getName() << std::endl;
 }
 
