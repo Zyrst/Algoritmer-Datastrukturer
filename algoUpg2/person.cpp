@@ -128,23 +128,25 @@ void Person::enemyOfMyFriend()
 
 void Person::printFriends()
 {
+	std::queue<Person*> backup = friends;
 	for (int i = 0; i < friends.size(); i++)
 	{
 		Person* tempPerson = friends.front();
 		friends.pop();
 		std::cout << tempPerson->mName << std::endl;	
 	}
-		
+	friends = backup;
 }
 
 void Person::printEnemies()
 {
+	std::queue<Person*> backup = enemies;
 	for (int i = 0; i < enemies.size(); i++)
 	{
 		Person* tempPerson = enemies.front();
 		enemies.pop();	
 		std::cout << tempPerson->mName << std::endl;
 	}
-		
+	enemies = backup;
 }
 

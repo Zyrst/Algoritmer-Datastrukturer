@@ -8,10 +8,9 @@ private:
 	~Graph();
 	static void killAll();
 	static void getNextUnfriend();
-	static void moveToNextElement();
+	static void moveToNextLevel();
 
 	Person* mPerson;
-	Person* mFriend;
 	Person* mEnemy;
 
 	int currentFriendPosition = 0;

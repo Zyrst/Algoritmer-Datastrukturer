@@ -1,12 +1,10 @@
 #include "person.h"
 
 //Dokumentation är för de veka.
-void Graph::drawGraph(std::vector<Person*> v){
-	for(auto i : v)
-	{
-		mPerson = i;
-		
-	}
+void Graph::drawGraph(Person* person)
+{
+	mPerson = person;
+ 	
 }
 
 void Graph::killAll()
@@ -19,7 +17,7 @@ void Graph::getNextUnfriend()
 	mEnemy = mPerson->enemies(currentEnemyPosition++);
 }
 
-void Graph::getNextFriend()
+void Graph::moveToNextLevel()
 {
-	mFriend = mPerson->friends(currentFriendPosition++);
+	
 }
