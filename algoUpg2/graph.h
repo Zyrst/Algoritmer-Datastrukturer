@@ -2,7 +2,7 @@
 
 class Graph{
 public:
-	static void drawGraph(std::vector<Person*>);
+	static void drawGraph(Person* person);
 private:
 	Graph();
 	~Graph();

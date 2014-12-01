@@ -5,7 +5,7 @@ void Graph::drawGraph(std::vector<Person*> v){
 	for(auto i : v)
 	{
 		mPerson = i;
-
+		
 	}
 }
 

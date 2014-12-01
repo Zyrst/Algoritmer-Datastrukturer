@@ -15,29 +15,24 @@ void Person::addFriend(Person* person)
 	if(person == this)
 		return;
 
+	bool found =  false;
+	std::queue<Person*> tempQueue;
+
 	// We can't add the same friends twice.
-	for(auto p : friends)
-		if(person == p)
-			return;
-
-	// We can't add a person that is on our unfriend list.
-	for(auto persons : enemies)
-		if(persons == person)
-			return;
-
-	friends.push_back(person);
-}
-
-void Person::removeFriend(Person* person)
-{
-	// Finds all the friends to keep.
-	// Adds them to a temp vector 
-	std::vector<Person*> temp;
-	for(auto persons : friends)
-		if(persons != person)
-			temp.push_back(persons);
-
-	friends = temp;
+	for (int i = 0; i < friends.size(); i++)
+	{
+		Person* tempPerson = friends.front();
+		friends.pop();
+		if(!found)
+			if(tempPerson == person)
+			{
+				found = true;
+				continue;
+			}
+		tempQueue.push(tempPerson);
+		/* code */
+	}
+	friends = tempQueue;
 }
 
 void Person::addToUnfriend(Person* person)
@@ -48,68 +43,108 @@ void Person::addToUnfriend(Person* person)
 		return;
 
 	// We can't add the same enemy twice.
-	for(auto p : enemies)
-		if(person == p)
-			return;
+		bool found =  false;
+	std::queue<Person*> tempQueue;
 
-	// Removes from friends. (Seems obvious)
-	for(auto persons : friends)
-		if(persons == person)
-			removeFriend(person);	
+	// We can't add the same enemies twice.
+	for (int i = 0; i < enemies.size(); i++)
+	{
+		Person* tempPerson = enemies.front();
+		enemies.pop();
+		if(!found)
+			if(tempPerson == person)
+			{
+				found = true;
+				continue;
+			}
+		tempQueue.push(tempPerson);
+		/* code */
+	}
+	enemies = tempQueue;
 
-	enemies.push_back(person);
+	
+	enemies.push(person);
 	person->addToUnfriend(this);
 }
 
-void Person::removeUnfriend(Person* person)
-{
-	std::vector<Person*> temp;
-	for(auto persons : enemies)
-		if(persons != person)
-			temp.push_back(persons);
-
-	enemies = temp;
-}
 
 void Person::enemyOfMyEnemy()
 {
-	for(auto i : enemies)
+	std::queue<Person*> tempEnemies = enemies;
+	std::queue<Person*> tempNewFriends;
+
+
+	for (int i = 0; i < enemies.size(); i++)
 	{
-		for(auto k : i->getEnemies())
-			addFriend(k);
+		Person* tempPerson = enemies.front();
+		enemies.pop();
+		std::queue<Person*> tempFriends = tempPerson->enemies;
+
+		for (int k = 0; k < tempPerson->enemies.size(); k++)
+		{
+			Person* tempFriend = tempPerson->enemies.front();
+			tempPerson->enemies.pop();
+			tempNewFriends.push(tempFriend);
+		}
+		tempPerson->enemies = tempFriends;
 	}
+	enemies = tempEnemies;
+	for (int i = 0; i < tempNewFriends.size(); i++)
+	{
+		Person* newFriend = tempNewFriends.front();
+		tempNewFriends.pop();
+		friends.push(newFriend);	
+	}	 
 }
 
 void Person::enemyOfMyFriend()
 {
-	for(auto i : friends)
-		for(auto k : i->getEnemies())
-			addToUnfriend(k);
+	std::queue<Person*> tempFriends = friends;
+	std::queue<Person*> tempNewEnemies;
+
+	for (int i = 0; i < friends.size(); i++)
+	{
+		Person* tempPerson = friends.front();
+		friends.pop();
+
+		std::queue<Person*> tempEnemies = tempPerson->enemies;
+		for (int k = 0; k < tempPerson->enemies.size(); k++)
+		{
+			Person* tempEnemy = tempPerson->enemies.front();
+			enemies.pop();
+			tempNewEnemies.push(tempEnemy);
+		}
+		tempPerson->enemies = tempEnemies;
 	}
 
-std::vector<Person*> Person::getEnemies()
-{
-	return enemies;
-}
-
-std::vector<Person*> Person::getFriends()
-{
-	return friends;
+	friends = tempFriends;
+	for (int i = 0; i < tempNewEnemies.size(); ++i)
+	{
+		Person* newEnemy = tempNewEnemies.front();
+		tempNewEnemies.pop();
+		enemies.push(newEnemy);
+	}
 }
 
 void Person::printFriends()
 {
-	for(auto i : friends)
-		std::cout << i->getName() << std::endl;
+	for (int i = 0; i < friends.size(); i++)
+	{
+		Person* tempPerson = friends.front();
+		friends.pop();
+		std::cout << tempPerson->mName << std::endl;	
+	}
+		
 }
 
 void Person::printEnemies()
 {
-	for(auto k : enemies)
-		std::cout << k->getName() << std::endl;
+	for (int i = 0; i < enemies.size(); i++)
+	{
+		Person* tempPerson = enemies.front();
+		enemies.pop();	
+		std::cout << tempPerson->mName << std::endl;
+	}
+		
 }
 
-std::string Person::getName()
-{
-	return mName;
-}

@@ -1,9 +1,9 @@
 #include "person.h"
-#include <vector>
+#include <queue>
 
 using namespace std;
 
-vector<Person*> v;
+queue<Person*> q; 
 int main()
 {
 	// Försök komma på ett smart sätt att rita upp en algoritm..
