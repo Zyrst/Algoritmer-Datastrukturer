@@ -1,4 +1,5 @@
 #include "person.h"
+#include <queue>
 
 class Graph{
 public:
@@ -6,13 +7,11 @@ public:
 private:
 	Graph();
 	~Graph();
-	static void killAll();
-	static void getNextUnfriend();
 	static void moveToNextLevel();
 
 	Person* mPerson;
 	Person* mEnemy;
 
-	int currentFriendPosition = 0;
-	int currentEnemyPosition = 0;
+	std::queue<Person*> currentLevelUnfriends;
+	std::queue<Person*> nextLevelUnfriends;
 };

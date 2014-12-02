@@ -64,7 +64,6 @@ void Person::addToUnfriend(Person* person)
 			}
 		}
 		tempQueue.push(tempPerson);
-		/* code */
 	}
 	enemies = tempQueue;
 
