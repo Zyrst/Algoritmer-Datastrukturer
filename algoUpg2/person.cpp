@@ -35,6 +35,9 @@ void Person::addFriend(Person* person)
 	friends = tempQueue;
 
 	friends.push(person);
+	if(!found){
+		person->addFriend(this);
+	}
 }
 
 void Person::addToUnfriend(Person* person)
