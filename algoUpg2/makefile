@@ -1,6 +1,6 @@
 #Makefile för mig i linux
 
-OBJECTS = person.o main.o
+OBJECTS = person.o main.o graph.o
 
 EXEC = upg2
 

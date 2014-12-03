@@ -1,19 +1,25 @@
 #include "person.h"
+#include "graph.h"
 #include <queue>
 
 using namespace std;
 
-queue<Person*> q; 
 int main()
 {
-	Person* eva = new Person("Eva");
-	Person* adolf = new Person("Adolf");
-	Person* Josef = new Person("Josef");
-
+	Graph* graph 	= new Graph();
+	Person* eva 	= new Person("Eva");
+	Person* adolf 	= new Person("Adolf");
+	Person* Josef 	= new Person("Josef");
+	Person* Gobbels = new Person("Gobbels");
+	Person* Jews	= new Person("Jews");
+	Person* God		= new Person("God");
 	// Get it? ;D
+	Jews->addToUnfriend(adolf);
 	adolf->addToUnfriend(Josef);
-	eva->addFriend(adolf);
+	adolf->addToUnfriend(God);
+	Josef->addToUnfriend(eva);
+	
 
-	Josef->printEnemies();
-	eva->printFriends();
+
+	graph->drawGraph(Jews);
 }
