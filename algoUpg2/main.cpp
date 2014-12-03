@@ -13,6 +13,7 @@ int main()
 	Person* Gobbels = new Person("Gobbels");
 	Person* Jews	= new Person("Jews");
 	Person* God		= new Person("God");
+	
 	// Get it? ;D
 	Jews->addToUnfriend(adolf);
 	adolf->addToUnfriend(Josef);

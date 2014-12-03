@@ -4,12 +4,11 @@
 using namespace std;
 
 int currentLevelPointer = 0;
-Person* mEnd = new Person("End");
 //Dokumentation är för de veka.
 void Graph::drawGraph(Person* person)
 {
 	mPerson = person;
-	while(mPerson != mEnd)
+	while(mPerson != NULL)
 	{
 		std::queue<Person*> tempQ = mPerson->enemies;
  		for(int i = 0; i < mPerson->enemies.size(); i++)
@@ -26,7 +25,7 @@ void Graph::drawGraph(Person* person)
 }
 void Graph::moveToNextElement()
 { 
-	if(currentLevelPointer == currentLevelUnfriends.size())
+	if(currentLevelUnfriends.empty())
 		moveToNextLevel();
 	else{
 		mPerson = currentLevelUnfriends.front();
@@ -43,7 +42,7 @@ void Graph::moveToNextLevel()
 		currentLevelPointer = 0;
 		// Allows us to use the BFS correctly.
 		currentLevelUnfriends = nextLevelUnfriends;
-		for(int i = 0; i < nextLevelUnfriends.size(); i++)
+		while(!nextLevelUnfriends.empty())
 		{
 			nextLevelUnfriends.pop();
 		}
@@ -51,8 +50,7 @@ void Graph::moveToNextLevel()
 		currentLevelUnfriends.pop();	
 	}
 	else{
-		std::cout << "mPerson is End" << std::endl;
-		mPerson = mEnd;
+		mPerson = NULL;
 	}
 	drawGraph(mPerson);
 }

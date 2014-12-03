@@ -16,7 +16,7 @@ void Person::addFriend(Person* person)
 		return;
 
 	bool found =  false;
-	std::queue<Person*> tempQueue = friends;
+	std::queue<Person*> tempQueue;
 
 	// We can't add the same friends twice.
 	for (int i = 0; i < friends.size(); i++)
@@ -35,6 +35,7 @@ void Person::addFriend(Person* person)
 	friends = tempQueue;
 
 	friends.push(person);
+
 }
 
 void Person::addToUnfriend(Person* person)
@@ -45,7 +46,7 @@ void Person::addToUnfriend(Person* person)
 		return;
 
 	bool found =  false;
-	std::queue<Person*> tempQueue = enemies;
+	std::queue<Person*> tempQueue;
 
 	// We can't add the same enemies twice.
 	for (int i = 0; i < enemies.size(); i++)
@@ -63,7 +64,6 @@ void Person::addToUnfriend(Person* person)
 		tempQueue.push(tempPerson);
 	}
 	enemies = tempQueue;
-
 	
 	enemies.push(person);
 	
