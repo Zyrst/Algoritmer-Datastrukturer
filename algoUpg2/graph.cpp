@@ -7,7 +7,14 @@ int currentLevelPointer = 0;
 //Dokumentation är för de veka.
 void Graph::drawGraph(Person* person)
 {
+	// To compare.
+	if(mDefault == NULL)
+	{
+		mDefault = person;
+	}
+
 	mPerson = person;
+	
 	while(mPerson != NULL)
 	{
 		std::queue<Person*> tempQ = mPerson->enemies;
@@ -16,6 +23,10 @@ void Graph::drawGraph(Person* person)
  			mEnemy = tempQ.front();
  			nextLevelUnfriends.push(mEnemy);
 
+ 			//Adds the first enemy found.
+ 			if(!enemyAlreadyAdded(mEnemy))
+ 				mDefault->addToUnfriend(mEnemy);
+
  			cout << mEnemy->mName << "(" << mPerson->mName<< ")" << endl;
  			tempQ.pop();	
  		}
@@ -23,6 +34,21 @@ void Graph::drawGraph(Person* person)
 	}
 
 }
+
+bool Graph::enemyAlreadyAdded(Person* person)
+{
+	std::queue<Person*> tempQ = mDefault->enemies;
+	for (int i = 0; i < tempQ.size(); ++i)
+	{
+		Person* tempP = tempQ.front();
+		tempQ.pop();
+		if(tempP == person)
+			return true;
+	}
+	return false;	
+}
+
+
 void Graph::moveToNextElement()
 { 
 	if(currentLevelUnfriends.empty())
