@@ -8,7 +8,7 @@ private:
 	void moveToNextLevel();
 	void moveToNextElement();
 	bool enemyAlreadyAdded(Person* person);
-	
+	bool isNotEnemy(Person* person);
 	Person* mPerson;
 	Person* mEnemy;
 	Person* mDefault;

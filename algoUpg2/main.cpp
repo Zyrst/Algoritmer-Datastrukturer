@@ -20,7 +20,9 @@ int main()
 	adolf->addToUnfriend(God);
 	Josef->addToUnfriend(eva);
 	
-
+	Jews->printFriends();
 
 	graph->drawGraph(Jews);
+
+	Jews->printFriends();
 }

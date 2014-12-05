@@ -24,8 +24,11 @@ void Graph::drawGraph(Person* person)
  			nextLevelUnfriends.push(mEnemy);
 
  			//Adds the first enemy found.
- 			if(!enemyAlreadyAdded(mEnemy))
- 				mDefault->addToUnfriend(mEnemy);
+ 			if(!enemyAlreadyAdded(mEnemy) && isNotEnemy(mEnemy))
+ 			{
+ 				mDefault->addFriend(mEnemy);
+ 				return;
+ 			}
 
  			cout << mEnemy->mName << "(" << mPerson->mName<< ")" << endl;
  			tempQ.pop();	
@@ -35,9 +38,22 @@ void Graph::drawGraph(Person* person)
 
 }
 
-bool Graph::enemyAlreadyAdded(Person* person)
+bool Graph::isNotEnemy(Person* person)
 {
 	std::queue<Person*> tempQ = mDefault->enemies;
+	for (int i = 0; i < tempQ.size(); ++i)
+	{
+		Person* tempP = tempQ.front();
+		tempQ.pop();
+		if(tempP == person)
+			return false;
+	}
+	return true;	
+}
+
+bool Graph::enemyAlreadyAdded(Person* person)
+{
+	std::queue<Person*> tempQ = mDefault->friends;
 	for (int i = 0; i < tempQ.size(); ++i)
 	{
 		Person* tempP = tempQ.front();
