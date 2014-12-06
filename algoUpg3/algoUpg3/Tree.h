@@ -13,5 +13,5 @@ private:
 	Tree* left;
 	Tree* right;
 	int mWeight;
-	char c;
+	char mChar;
 };

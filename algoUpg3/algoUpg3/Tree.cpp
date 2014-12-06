@@ -2,12 +2,14 @@
 
 Tree::Tree(int w, char c_)
 {
-	//We do something
+	mWeight = w;
+	mChar = c_;
 }
 
 Tree::Tree(int w, Tree* t1, Tree* t2)
 {
-	//we do something else
+	right	= t1;
+	left	= t2;
 }
 
 Tree::~Tree()
