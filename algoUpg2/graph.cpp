@@ -46,10 +46,17 @@ bool Graph::isNotEnemy(Person* person)
 	std::queue<Person*> tempQ = mDefault->enemies;
 	for (int i = 0; i < tempQ.size(); ++i)
 	{
-		Person* tempP = tempQ.front();
+		/*Person* tempP = tempQ.front();
 		tempQ.pop();
 		if(tempP == person)
+			return false;*/
+		if (tempQ.front() == person)
+		{
+			tempQ.pop();
 			return false;
+		}
+		else
+			tempQ.pop();
 	}
 	return true;	
 }
@@ -61,10 +68,17 @@ bool Graph::enemyAlreadyAdded(Person* person)
 	std::queue<Person*> tempQ = mDefault->friends;
 	for (int i = 0; i < tempQ.size(); ++i)
 	{
-		Person* tempP = tempQ.front();
+		/*Person* tempP = tempQ.front();
 		tempQ.pop();
 		if(tempP == person)
-			return true;
+			return true;*/
+		if (tempQ.front() == person)
+		{
+			tempQ.pop();
+			return false;
+		}
+		else
+			tempQ.pop();
 	}
 	return false;	
 }
