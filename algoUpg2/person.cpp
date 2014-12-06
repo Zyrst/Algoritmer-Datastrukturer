@@ -12,8 +12,10 @@ Person::~Person()
 void Person::addFriend(Person* person)
 {
 	// We can't add ourselves to friends.
-	if(person == this)
+	if (person == this)
+	{
 		return;
+	}
 
 	bool found =  false;
 	std::queue<Person*> tempQueue;

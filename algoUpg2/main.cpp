@@ -10,19 +10,23 @@ int main()
 	Person* eva 	= new Person("Eva");
 	Person* adolf 	= new Person("Adolf");
 	Person* Josef 	= new Person("Josef");
-	Person* Gobbels = new Person("Gobbels");
 	Person* Jews	= new Person("Jews");
-	Person* God		= new Person("God");
 	
 	// Get it? ;D
 	Jews->addToUnfriend(adolf);
 	adolf->addToUnfriend(Josef);
-	adolf->addToUnfriend(God);
 	Josef->addToUnfriend(eva);
-	
-	Jews->printFriends();
+	adolf->addFriend(eva);
 
+	std::cout << "Adolfs friends: " << std::endl;
+	adolf->printFriends();
+	std::cout << "Josef enemies: " << std::endl;
+	Josef->printEnemies();
+
+	std::cout << "Jew graph: " << std::endl;
 	graph->drawGraph(Jews);
 
+	std::cout << "Jews friends: " << std::endl;
 	Jews->printFriends();
+	getchar();
 }

@@ -17,6 +17,7 @@ void Graph::drawGraph(Person* person)
 	
 	while(mPerson != NULL)
 	{
+		//Temorary queue contains Persons enemies
 		std::queue<Person*> tempQ = mPerson->enemies;
  		for(int i = 0; i < mPerson->enemies.size(); i++)
  		{
@@ -30,7 +31,7 @@ void Graph::drawGraph(Person* person)
  				return;
  			}
 
- 			cout << mEnemy->mName << "(" << mPerson->mName<< ")" << endl;
+ 			cout << mEnemy->mName << " is enemy of: " << mPerson->mName<<endl;
  			tempQ.pop();	
  		}
  		moveToNextElement();
@@ -38,6 +39,8 @@ void Graph::drawGraph(Person* person)
 
 }
 
+//Returns false if it's an enemy
+//else true
 bool Graph::isNotEnemy(Person* person)
 {
 	std::queue<Person*> tempQ = mDefault->enemies;
@@ -51,6 +54,8 @@ bool Graph::isNotEnemy(Person* person)
 	return true;	
 }
 
+//Returns true if it's a friend
+//Else false
 bool Graph::enemyAlreadyAdded(Person* person)
 {
 	std::queue<Person*> tempQ = mDefault->friends;

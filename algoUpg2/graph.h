@@ -1,5 +1,6 @@
 #include <queue>
-#include "person.h"
+
+class Person;
 
 class Graph{
 public:
@@ -9,6 +10,7 @@ private:
 	void moveToNextElement();
 	bool enemyAlreadyAdded(Person* person);
 	bool isNotEnemy(Person* person);
+	bool isAlreadyFriend(Person* person);
 	Person* mPerson;
 	Person* mEnemy;
 	Person* mDefault;
