@@ -8,10 +8,10 @@ public:
 	~Tree();
 	int getWeight() const;
 	void printTree(std::vector<char>& bitString) const;
-
+	char mChar;
 private: 
 	Tree* left;
 	Tree* right;
 	int mWeight;
-	char mChar;
+	
 };
