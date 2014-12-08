@@ -1,6 +1,7 @@
 #include "person.h"
 #include "graph.h"
 #include <iostream>
+#include <set>
 using namespace std;
 
 int 	currentLevelPointer = 0;
@@ -69,9 +70,13 @@ void Graph::drawGraph(Person* person)
 }
 
 
-void draw(std::set<Person* , std::set<int, bool>> _s)
+void draw(set<Person* , set<int, bool>> _s)
 {
-
+	//INSERT SUPER ALGORITM HERE.
+	for(int i = 0; i < _s.size(); i++)
+	{
+		Person* _person = s[i]
+	}
 }
 
 
