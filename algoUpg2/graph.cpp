@@ -151,6 +151,7 @@ void Graph::moveToNextLevel()
 	}
 
 	else if(!doneWithEnemies){
+		currentPaths = 0;
 		mPerson = mDefault;
 		doneWithEnemies = true;
 	}
