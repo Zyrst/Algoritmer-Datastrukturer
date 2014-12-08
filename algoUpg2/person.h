@@ -12,8 +12,6 @@ public:
 	void addFriend(Person *person);
 	void addToUnfriend(Person *person);
 
-	void enemyOfMyEnemy();
-	void enemyOfMyFriend();
 
 	//String methods
 	void printFriends();

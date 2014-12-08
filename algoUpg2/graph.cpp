@@ -16,7 +16,7 @@ void Graph::drawGraph(Person* person)
 	}
 
 	mPerson = person;
-	std::set<Person*, std::set<int, bool>> EnemySet;
+	std::vector<pair<Person*, pair<int, bool>>> vec;
 	while(mPerson != NULL)
 	{
 		if(!doneWithEnemies)
@@ -29,12 +29,12 @@ void Graph::drawGraph(Person* person)
  				nextLevelUnfriends.push(mEnemy);
 
  				//Adds the first enemy found.
-	 			if(!enemyAlreadyAdded(mEnemy) && isNotEnemy(mEnemy))
+	 			if(!isNotFriend(mEnemy) && isNotEnemy(mEnemy))
  				{
  					mDefault->addFriend(mEnemy);
- 					bool tempB = true;
- 					std::set<int, bool> _set(currentPaths, tempB);
- 					EnemySet.insert(mEnemy, _set);
+ 					std::pair<int, bool> _set(currentPaths, true);
+ 					std::pair<Person*, std::pair<int, bool>> EnemyPair(mEnemy, _set);
+ 					vec.push_back(EnemyPair);
  					return;
  				}
  				cout << mEnemy->mName << " is enemy of: " << mPerson->mName<<endl;
@@ -48,50 +48,56 @@ void Graph::drawGraph(Person* person)
  			{
  				for(int i = 0; i < mPerson->enemies.size(); i++)
  				{
- 					mFriend = tempF.front();
+ 					Person* mFriend = tempF.front();
  					nextLevelUnfriends.push(mFriend);
 
  					//Adds the first enemy found.	
- 					if(!enemyAlreadyAdded(mFriend) && isNotFriend(mFriend))
+ 					if(!isNotEnemy(mFriend) && isNotFriend(mFriend))
  					{
  						mDefault->addFriend(mFriend);
- 						bool tempB = false;
- 						std::set<int, bool> _set;
- 						_set(currentPaths, tempB);
- 						EnemySet.insert(mFriend, _set);
+ 						std::pair<int, bool> _set(currentPaths, false);
+ 						std::pair<Person*, std::pair<int, bool>> EnemyPair(mFriend, _set);
+ 						vec.push_back(EnemyPair);
  						return;
  					}
- 					cout << mEnemy->mName << " is enemy of: " << mPerson->mName<<endl;
+ 					cout << mFriend->mName << " is friend with: " << mPerson->mName<<endl;
  					tempF.pop();	
  				}
  			}
 		}
  		moveToNextElement();
 	}
-	draw(EnemySet);
+	draw(vec);
 }
 
 
-void draw(set<Person* , set<int, bool>> _s)
+void Graph::draw(std::vector<pair<Person*, pair<int, bool>>> _s) 
 {
 	//INSERT SUPER ALGORITM HERE.
 	for(int i = 0; i < _s.size(); i++)
 	{
-		Person* _person = _s[i];
-		std::set<int, bool> _value = _s[i]->value_comp; 
+		std::pair<Person*, pair<int, bool>> _p0 = _s[i];
+		std::pair<int, bool> _v0 = _p0.second;
 		for(int k = 1; _s.size(); k++)
 		{
-			Person* _p1 = _s[k];
-			if(_person == _p1)
+			std::pair<Person*, pair<int, bool>> _p1 = _s[i];
+			if(_p0.first == _p1.first)
 			{
-				std::set<int, bool> _v1 = _s[k]->value_comp;
-				if(_value < _v1) _s.erase(k);
-				if(_value > _v1) _s.erase(i);
+				std::pair<int, bool> _v1 = _s[k].second;
+				if(_v0.first < _v1.first) _s.erase(_s.begin() + k);
+				if(_v0.first > _v1.first) _s.erase(_s.begin() + i);
 			}
-
-
 		}
+	}
+	for(int i =	0; i < _s.size(); i++)
+	{
+		Person* 				p = _s[i].first;
+		std::pair<int, bool> 	v = _s[i].second;
 
+		if(v.second == true)
+			mDefault->addToUnfriend(p);
+		else if(v.second == false)
+			mDefault->addFriend(p);
 	}
 }
 
@@ -103,15 +109,10 @@ void draw(set<Person* , set<int, bool>> _s)
 bool Graph::isNotEnemy(Person* person)
 {
 	std::queue<Person*> tempQ = mDefault->enemies;
-	for (int i = 0; i < tempQ.size(); ++i)
+	for (int i = 0; i < tempQ.size(); i++)
 	{
-		/*Person* tempP = tempQ.front();
-		tempQ.pop();
-		if(tempP == person)
-			return false;*/
 		if (tempQ.front() == person)
 		{
-			tempQ.pop();
 			return false;
 		}
 		else
@@ -120,28 +121,19 @@ bool Graph::isNotEnemy(Person* person)
 	return true;	
 }
 
-//Returns true if it's a friend
-//Else false
-bool Graph::enemyAlreadyAdded(Person* person)
+bool Graph::isNotFriend(Person* person)
 {
 	std::queue<Person*> tempQ = mDefault->friends;
-	for (int i = 0; i < tempQ.size(); ++i)
+	for (int i = 0; i < tempQ.size(); i++)
 	{
-		/*Person* tempP = tempQ.front();
-		tempQ.pop();
-		if(tempP == person)
-			return true;*/
-		if (tempQ.front() == person)
+		if(tempQ.front() == person)
 		{
-			tempQ.pop();
 			return false;
 		}
-		else
-			tempQ.pop();
+		tempQ.pop();
 	}
-	return false;	
+	return true;
 }
-
 
 void Graph::moveToNextElement()
 { 

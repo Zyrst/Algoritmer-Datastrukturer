@@ -7,26 +7,30 @@ using namespace std;
 int main()
 {
 	Graph* graph 	= new Graph();
-	Person* eva 	= new Person("Eva");
-	Person* adolf 	= new Person("Adolf");
-	Person* Josef 	= new Person("Josef");
-	Person* Jews	= new Person("Jews");
-	
-	// Get it? ;D
-	Jews->addToUnfriend(adolf);
-	adolf->addToUnfriend(Josef);
-	Josef->addToUnfriend(eva);
-	adolf->addFriend(eva);
+	Person* j = new Person("J");
+	Person* a = new Person("A");
+	Person* s = new Person("S");
+	Person* e = new Person("E");
+	Person* g = new Person("G");
+	Person* k = new Person("K");
+	Person* i = new Person("I");
 
-	std::cout << "Adolfs friends: " << std::endl;
-	adolf->printFriends();
-	std::cout << "Josef enemies: " << std::endl;
-	Josef->printEnemies();
+	j->addToUnfriend(a);
+	j->addFriend(k);
 
-	std::cout << "Jew graph: " << std::endl;
-	graph->drawGraph(Jews);
+	a->addFriend(e);
+	a->addFriend(g);
+	a->addToUnfriend(s);
 
-	std::cout << "Jews friends: " << std::endl;
-	Jews->printFriends();
+	e->addFriend(g);
+	k->addFriend(i);
+
+	i->addToUnfriend(s);
+
+	graph->drawGraph(j);
+
+	j->printFriends();
+	cout << endl;
+	j->printEnemies();
 	getchar();
 }
