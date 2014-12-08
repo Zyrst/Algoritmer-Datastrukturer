@@ -1,7 +1,6 @@
 #include "person.h"
 #include "graph.h"
 #include <iostream>
-#include <set>
 using namespace std;
 
 int 	currentLevelPointer = 0;
@@ -33,7 +32,8 @@ void Graph::drawGraph(Person* person)
 	 			if(!enemyAlreadyAdded(mEnemy) && isNotEnemy(mEnemy))
  				{
  					mDefault->addFriend(mEnemy);
- 					std::set<int, bool> _set = {currentPaths, true};
+ 					bool tempB = true;
+ 					std::set<int, bool> _set(currentPaths, tempB);
  					EnemySet.insert(mEnemy, _set);
  					return;
  				}
@@ -55,7 +55,9 @@ void Graph::drawGraph(Person* person)
  					if(!enemyAlreadyAdded(mFriend) && isNotFriend(mFriend))
  					{
  						mDefault->addFriend(mFriend);
- 						std::set<int, bool> _set = {currentPaths, false};
+ 						bool tempB = false;
+ 						std::set<int, bool> _set;
+ 						_set(currentPaths, tempB);
  						EnemySet.insert(mFriend, _set);
  						return;
  					}
@@ -75,7 +77,21 @@ void draw(set<Person* , set<int, bool>> _s)
 	//INSERT SUPER ALGORITM HERE.
 	for(int i = 0; i < _s.size(); i++)
 	{
-		Person* _person = s[i]
+		Person* _person = _s[i];
+		std::set<int, bool> _value = _s[i]->value_comp; 
+		for(int k = 1; _s.size(); k++)
+		{
+			Person* _p1 = _s[k];
+			if(_person == _p1)
+			{
+				std::set<int, bool> _v1 = _s[k]->value_comp;
+				if(_value < _v1) _s.erase(k);
+				if(_value > _v1) _s.erase(i);
+			}
+
+
+		}
+
 	}
 }
 
@@ -163,7 +179,7 @@ void Graph::moveToNextLevel()
 
 	else
 	{
-		mPerson = NULL
+		mPerson = NULL;
 	}
 	drawGraph(mPerson);
 }
