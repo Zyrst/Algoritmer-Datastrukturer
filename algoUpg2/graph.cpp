@@ -3,7 +3,9 @@
 #include <iostream>
 using namespace std;
 
-int currentLevelPointer = 0;
+int 	currentLevelPointer = 0;
+int 	currentPaths 		= 0;
+bool 	doneWithEnemies 	= false;
 //Dokumentation är för de veka.
 void Graph::drawGraph(Person* person)
 {
@@ -14,30 +16,66 @@ void Graph::drawGraph(Person* person)
 	}
 
 	mPerson = person;
-	
+	std::set<Person*, std::set<int, bool>> EnemySet;
 	while(mPerson != NULL)
 	{
-		//Temorary queue contains Persons enemies
-		std::queue<Person*> tempQ = mPerson->enemies;
- 		for(int i = 0; i < mPerson->enemies.size(); i++)
- 		{
- 			mEnemy = tempQ.front();
- 			nextLevelUnfriends.push(mEnemy);
-
- 			//Adds the first enemy found.
- 			if(!enemyAlreadyAdded(mEnemy) && isNotEnemy(mEnemy))
+		if(!doneWithEnemies)
+		{
+			//Temorary queue contains Persons enemies
+			std::queue<Person*> tempQ = mPerson->enemies;
+ 			for(int i = 0; i < mPerson->enemies.size(); i++)
  			{
- 				mDefault->addFriend(mEnemy);
- 				return;
- 			}
+ 				mEnemy = tempQ.front();
+ 				nextLevelUnfriends.push(mEnemy);
 
- 			cout << mEnemy->mName << " is enemy of: " << mPerson->mName<<endl;
- 			tempQ.pop();	
- 		}
+ 				//Adds the first enemy found.
+	 			if(!enemyAlreadyAdded(mEnemy) && isNotEnemy(mEnemy))
+ 				{
+ 					mDefault->addFriend(mEnemy);
+ 					std::set<int, bool> _set = {currentPaths, true};
+ 					EnemySet.insert(mEnemy, _set);
+ 					return;
+ 				}
+ 				cout << mEnemy->mName << " is enemy of: " << mPerson->mName<<endl;
+ 				tempQ.pop();	
+ 			}
+		}
+		else if(doneWithEnemies)
+		{
+			std::queue<Person*> tempF = mPerson->friends;
+ 			for(int i = 0; i < mPerson->friends.size(); i++)
+ 			{
+ 				for(int i = 0; i < mPerson->enemies.size(); i++)
+ 				{
+ 					mFriend = tempF.front();
+ 					nextLevelUnfriends.push(mFriend);
+
+ 					//Adds the first enemy found.	
+ 					if(!enemyAlreadyAdded(mFriend) && isNotFriend(mFriend))
+ 					{
+ 						mDefault->addFriend(mFriend);
+ 						std::set<int, bool> _set = {currentPaths, false};
+ 						EnemySet.insert(mFriend, _set);
+ 						return;
+ 					}
+ 					cout << mEnemy->mName << " is enemy of: " << mPerson->mName<<endl;
+ 					tempF.pop();	
+ 				}
+ 			}
+		}
  		moveToNextElement();
 	}
+	draw(EnemySet);
+}
+
+
+void draw(std::set<Person* , std::set<int, bool>> _s)
+{
 
 }
+
+
+
 
 //Returns false if it's an enemy
 //else true
@@ -107,11 +145,19 @@ void Graph::moveToNextLevel()
 		{
 			nextLevelUnfriends.pop();
 		}
+		currentPaths++;
 		mPerson = currentLevelUnfriends.front();
 		currentLevelUnfriends.pop();	
 	}
-	else{
-		mPerson = NULL;
+
+	else if(!doneWithEnemies){
+		mPerson = mDefault;
+		doneWithEnemies = true;
+	}
+
+	else
+	{
+		mPerson = NULL
 	}
 	drawGraph(mPerson);
 }
