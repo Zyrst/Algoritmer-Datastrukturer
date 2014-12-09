@@ -16,28 +16,23 @@ void Person::addFriend(Person* person)
 	{
 		return;
 	}
-
-	bool found =  false;
-	std::queue<Person*> tempQueue;
+	// Creates a copy of the persons friends.
+	// We will empty it in the search for a copy.
+	std::queue<Person*> tempQueue = friends;
 
 	// We can't add the same friends twice.
-	for (int i = 0; i < friends.size(); i++)
-	{
-		Person* tempPerson = friends.front();
-		friends.pop();
-		if(!found)
-			if(tempPerson == person)
-			{
-				found = true;
-				continue;
-			}
-		tempQueue.push(tempPerson);
-		/* code */
+	while(!tempQueue.empty())
+	{		
+		// Takes the front item and checks if
+		// it's the same as the one we try to add.
+		if(tempQueue.front() == person)
+		{
+			return;
+		}
+		tempQueue.pop();
 	}
-	friends = tempQueue;
-
+	//Friends for ever.
 	friends.push(person);
-
 }
 
 void Person::addToUnfriend(Person* person)
@@ -47,54 +42,44 @@ void Person::addToUnfriend(Person* person)
 	if(person == this)
 		return;
 
-	bool found =  false;
-	std::queue<Person*> tempQueue;
+	// Creates a copy of the persons enemies.
+	// We will empty it in the search for a copy.
+	std::queue<Person*> tempQueue = enemies;
 
 	// We can't add the same enemies twice.
-	for (int i = 0; i < enemies.size(); i++)
+	while(!tempQueue.empty())
 	{
-		Person* tempPerson = enemies.front();
-		enemies.pop();
-		if(!found)
+		// Takes the front item and checks if
+		// it's the same as the one we try to add.
+		if(tempQueue.front() == person)
 		{
-			if(tempPerson == person)
-			{
-				found = true;
-				continue;
-			}
+			return;
 		}
-		tempQueue.push(tempPerson);
+		tempQueue.pop();		
 	}
-	enemies = tempQueue;
-	
+	// Apperently sir, we made an enemy.
 	enemies.push(person);
 	
 }
 
+// Just makes a copy of our queue with friends/enemies.
+// Then pops the queue while printing.
 void Person::printFriends()
 {
 	std::queue<Person*> backup = friends;
-	for (int i = 0; i < friends.size(); i++)
+	while(!backup.empty())
 	{
-		/*Person* tempPerson = friends.front();
-		friends.pop();*/
-
-		//Spara lite kopieringar
-		std::cout << friends.front()->mName << std::endl;	
-		friends.pop();
+		std::cout << backup.front()->mName << " ";	
+		backup.pop();
 	}
-	friends = backup;
 }
 
 void Person::printEnemies()
 {
 	std::queue<Person*> backup = enemies;
-	for (int i = 0; i < enemies.size(); i++)
+	while(!backup.empty()) 
 	{
-		/*Person* tempPerson = enemies.front();
-		enemies.pop();	*/
-		std::cout << enemies.front()->mName << std::endl;
-		enemies.pop();
+		std::cout << backup.front()->mName << " ";
+		backup.pop();
 	}
-	enemies = backup;
 }
