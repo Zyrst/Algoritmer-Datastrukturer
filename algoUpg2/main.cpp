@@ -26,5 +26,4 @@ int main()
 	j->printFriends();
 	cout << endl << "enemies:";
 	j->printEnemies();
-	getchar();
 }

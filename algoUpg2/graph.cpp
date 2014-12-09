@@ -3,21 +3,25 @@
 #include <iostream>
 using namespace std;
 
-int 	currentLevelPointer = 0;
-int 	currentPaths 		= 0;
+
+int currentPaths = 0;
+
 //Dokumentation är för de veka.
 void Graph::drawGraph(Person* person)
 {
-	// To compare.
+	// So we have a person to add their new friends/enemies.
 	if(mDefault == NULL)
 	{
 		mDefault = person;
 	}
 
 	mPerson = person;
-	std::vector<pair<Person*, pair<int, bool>>> vec;
+	// If the last used person have no enemies. 
+	// mPerson will be NULL and allow us to terminate.
 	while(mPerson != NULL)
 	{
+		cout << "current person: " << person->mName << endl;
+		// A person needs unfriends to continue.
 		if(!mPerson->enemies.empty())
 		{
 			//Temorary queue contains Persons enemies
@@ -25,15 +29,14 @@ void Graph::drawGraph(Person* person)
  			for(int i = 0; i < mPerson->enemies.size(); i++)
  			{
  				mEnemy = tempQ.front();
- 				nextLevelUnfriends.push(mEnemy);
-
- 				//Adds the first enemy found.
+ 				// We don't want to add the same person multiple times.
 	 			if(!mEnemy->marked)
  				{
  					mEnemy->marked = true;
- 					if(currentPaths % 2 == 0)
+ 					nextLevelUnfriends.push(mEnemy);
+ 					if(currentPaths % 2 == 0 && mPerson != mDefault)
  						mDefault->addFriend(mEnemy);
- 					else
+ 					else if(currentPaths % 2 == 1 && mPerson != mDefault)
  						mDefault->addToUnfriend(mEnemy);
  					return;
  				}
@@ -52,7 +55,6 @@ void Graph::moveToNextElement()
 	else{
 		mPerson = currentLevelUnfriends.front();
 		currentLevelUnfriends.pop();
-		currentLevelPointer++;
 		drawGraph(mPerson);		
 	}
 }
@@ -61,7 +63,6 @@ void Graph::moveToNextLevel()
 {
 	if(!nextLevelUnfriends.empty())
 	{
-		currentLevelPointer = 0;
 		// Allows us to use the BFS correctly.
 		currentLevelUnfriends = nextLevelUnfriends;
 		while(!nextLevelUnfriends.empty())
@@ -73,7 +74,8 @@ void Graph::moveToNextLevel()
 		mPerson = currentLevelUnfriends.front();
 		currentLevelUnfriends.pop();	
 	}
-
+	// We reached the end. 
+	// Time to end this.
 	else
 	{
 		mPerson = NULL;

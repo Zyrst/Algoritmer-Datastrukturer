@@ -17,27 +17,19 @@ void Person::addFriend(Person* person)
 		return;
 	}
 
-	bool found =  false;
-	std::queue<Person*> tempQueue;
+	std::queue<Person*> tempQueue = friends;
 
 	// We can't add the same friends twice.
-	for (int i = 0; i < friends.size(); i++)
-	{
-		Person* tempPerson = friends.front();
-		friends.pop();
-		if(!found)
-			if(tempPerson == person)
-			{
-				found = true;
-				continue;
-			}
-		tempQueue.push(tempPerson);
-		/* code */
+	while(!tempQueue.empty())
+	{		
+		if(tempQueue.front() == person)
+		{
+			return;
+		}
+		tempQueue.pop();
 	}
-	friends = tempQueue;
-
 	friends.push(person);
-
+	std::cout << "Added " << person->mName << " to " << mName << std::endl;
 }
 
 void Person::addToUnfriend(Person* person)
@@ -47,26 +39,18 @@ void Person::addToUnfriend(Person* person)
 	if(person == this)
 		return;
 
-	bool found =  false;
-	std::queue<Person*> tempQueue;
+
+	std::queue<Person*> tempQueue = enemies;
 
 	// We can't add the same enemies twice.
-	for (int i = 0; i < enemies.size(); i++)
+	while(!tempQueue.empty())
 	{
-		Person* tempPerson = enemies.front();
-		enemies.pop();
-		if(!found)
+		if(tempQueue.front() == person)
 		{
-			if(tempPerson == person)
-			{
-				found = true;
-				continue;
-			}
+			return;
 		}
-		tempQueue.push(tempPerson);
+		tempQueue.pop();		
 	}
-	enemies = tempQueue;
-	
 	enemies.push(person);
 	
 }
