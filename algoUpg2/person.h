@@ -12,7 +12,7 @@ public:
 	void addFriend(Person *person);
 	void addToUnfriend(Person *person);
 
-
+	bool marked = false;
 	//String methods
 	void printFriends();
 	void printEnemies();

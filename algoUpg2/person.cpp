@@ -76,10 +76,6 @@ void Person::printFriends()
 	std::queue<Person*> backup = friends;
 	for (int i = 0; i < friends.size(); i++)
 	{
-		/*Person* tempPerson = friends.front();
-		friends.pop();*/
-
-		//Spara lite kopieringar
 		std::cout << friends.front()->mName << std::endl;	
 		friends.pop();
 	}
@@ -91,8 +87,6 @@ void Person::printEnemies()
 	std::queue<Person*> backup = enemies;
 	for (int i = 0; i < enemies.size(); i++)
 	{
-		/*Person* tempPerson = enemies.front();
-		enemies.pop();	*/
 		std::cout << enemies.front()->mName << std::endl;
 		enemies.pop();
 	}

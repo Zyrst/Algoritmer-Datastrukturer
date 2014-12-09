@@ -17,21 +17,14 @@ int main()
 	Person* i = new Person("I");
 
 	j->addToUnfriend(a);
-	j->addFriend(k);
-
-	a->addFriend(e);
-	a->addFriend(g);
 	a->addToUnfriend(s);
-
-	e->addFriend(g);
-	k->addFriend(i);
-
 	i->addToUnfriend(s);
-
+	s->addToUnfriend(k);
+	
 	graph->drawGraph(j);
-
+	cout << "freinds:";
 	j->printFriends();
-	cout << endl;
+	cout << endl << "enemies:";
 	j->printEnemies();
 	getchar();
 }
