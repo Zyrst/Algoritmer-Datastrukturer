@@ -64,7 +64,7 @@ void Person::printFriends()
 	std::queue<Person*> backup = friends;
 	while(!backup.empty())
 	{
-		std::cout << backup.front()->mName << std::endl;	
+		std::cout << backup.front()->mName << " ";	
 		backup.pop();
 	}
 }
@@ -74,7 +74,7 @@ void Person::printEnemies()
 	std::queue<Person*> backup = enemies;
 	while(!backup.empty()) 
 	{
-		std::cout << backup.front()->mName << std::endl;
+		std::cout << backup.front()->mName << " ";
 		backup.pop();
 	}
 }

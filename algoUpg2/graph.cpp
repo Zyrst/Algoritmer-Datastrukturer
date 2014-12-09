@@ -4,7 +4,7 @@
 using namespace std;
 
 
-int currentPaths = 0;
+int currentPaths = 1;
 
 //Dokumentation är för de veka.
 void Graph::drawGraph(Person* person)
