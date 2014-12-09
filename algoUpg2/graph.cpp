@@ -49,7 +49,12 @@ void Graph::drawGraph(Person* person)
  				for(int i = 0; i < mPerson->enemies.size(); i++)
  				{
  					Person* mFriend = tempF.front();
+ 					if(mFriend == nextLevelUnfriends.back())
+ 					{
+ 						return;
+ 					}
  					nextLevelUnfriends.push(mFriend);
+ 					
 
  					//Adds the first enemy found.	
  					if(!isNotEnemy(mFriend) && isNotFriend(mFriend))
