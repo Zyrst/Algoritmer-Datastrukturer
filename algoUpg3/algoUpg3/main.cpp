@@ -23,7 +23,7 @@ void createTree(std::string s, std::priority_queue<TreeWrapper> q)
 		}
 
 		//Kollar om den redan finns i kön.
-		for (auto k : v)
+		for (auto &k : v)
 		{
 			if (k->mChar == s[i])
 			{

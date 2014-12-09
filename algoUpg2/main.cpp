@@ -7,6 +7,7 @@ using namespace std;
 int main()
 {
 	Graph* graph 	= new Graph();
+	
 	Person* j = new Person("J");
 	Person* a = new Person("A");
 	Person* s = new Person("S");

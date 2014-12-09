@@ -49,7 +49,12 @@ void Graph::drawGraph(Person* person)
  				for(int i = 0; i < mPerson->enemies.size(); i++)
  				{
  					Person* mFriend = tempF.front();
+ 					if(mFriend == nextLevelUnfriends.back())
+ 					{
+ 						return;
+ 					}
  					nextLevelUnfriends.push(mFriend);
+ 					
 
  					//Adds the first enemy found.	
  					if(!isNotEnemy(mFriend) && isNotFriend(mFriend))
@@ -64,13 +69,14 @@ void Graph::drawGraph(Person* person)
  					tempF.pop();	
  				}
  			}
+ 			doneWithEnemies = false;
 		}
  		moveToNextElement();
 	}
 	draw(vec);
 }
 
-
+// recives a package in form of a vector containing pairs with person and a pair with relevant data.
 void Graph::draw(std::vector<pair<Person*, pair<int, bool>>> _s) 
 {
 	//INSERT SUPER ALGORITM HERE.
@@ -120,7 +126,7 @@ bool Graph::isNotEnemy(Person* person)
 	}
 	return true;	
 }
-
+// Returns false if person is found in friends.
 bool Graph::isNotFriend(Person* person)
 {
 	std::queue<Person*> tempQ = mDefault->friends;
@@ -137,14 +143,22 @@ bool Graph::isNotFriend(Person* person)
 
 void Graph::moveToNextElement()
 { 
-	if(currentLevelUnfriends.empty())
-		moveToNextLevel();
-	else{
-		mPerson = currentLevelUnfriends.front();
-		currentLevelUnfriends.pop();
-		currentLevelPointer++;
-		drawGraph(mPerson);		
+	if(doneWithEnemies){
+		if(currentLevelUnfriends.empty())
+			moveToNextLevel();
+
+		else{
+			mPerson = currentLevelUnfriends.front();
+			currentLevelUnfriends.pop();
+			currentLevelPointer++;
+			drawGraph(mPerson);		
+		}
 	}
+	else if(!doneWithEnemies){
+		doneWithEnemies = true;
+		drawGraph(mPerson);
+	}
+
 }
 
 void Graph::moveToNextLevel()
@@ -158,15 +172,10 @@ void Graph::moveToNextLevel()
 		{
 			nextLevelUnfriends.pop();
 		}
+
 		currentPaths++;
 		mPerson = currentLevelUnfriends.front();
 		currentLevelUnfriends.pop();	
-	}
-
-	else if(!doneWithEnemies){
-		currentPaths = 0;
-		mPerson = mDefault;
-		doneWithEnemies = true;
 	}
 
 	else
