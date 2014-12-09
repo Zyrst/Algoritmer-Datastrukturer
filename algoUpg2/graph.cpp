@@ -34,11 +34,11 @@ void Graph::drawGraph(Person* person)
  				{
  					mEnemy->marked = true;
  					nextLevelUnfriends.push(mEnemy);
+
  					if(currentPaths % 2 == 0 && mPerson != mDefault)
  						mDefault->addFriend(mEnemy);
  					else if(currentPaths % 2 == 1 && mPerson != mDefault)
  						mDefault->addToUnfriend(mEnemy);
- 					return;
  				}
  				tempQ.pop();	
  			}
