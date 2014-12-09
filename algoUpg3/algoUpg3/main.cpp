@@ -36,8 +36,11 @@ void createTree(std::string s, std::priority_queue<TreeWrapper> q)
 			Tree* t = new Tree(w, s[i]);
 			v.push_back(t);
 			q.push(t);
-		}
-			
+		}			
+	}
+	for (auto i : v)
+	{
+		q.push(i);
 	}
 }
 
