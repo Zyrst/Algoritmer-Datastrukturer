@@ -30,6 +30,7 @@ void Graph::drawGraph(Person* person)
  				//Adds the first enemy found.
 	 			if(!mEnemy->marked)
  				{
+ 					mEnemy->marked = true;
  					if(currentPaths % 2 == 0)
  						mDefault->addFriend(mEnemy);
  					else
