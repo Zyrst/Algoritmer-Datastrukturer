@@ -16,20 +16,23 @@ void Person::addFriend(Person* person)
 	{
 		return;
 	}
-
+	// Creates a copy of the persons friends.
+	// We will empty it in the search for a copy.
 	std::queue<Person*> tempQueue = friends;
 
 	// We can't add the same friends twice.
 	while(!tempQueue.empty())
 	{		
+		// Takes the front item and checks if
+		// it's the same as the one we try to add.
 		if(tempQueue.front() == person)
 		{
 			return;
 		}
 		tempQueue.pop();
 	}
+	//Friends for ever.
 	friends.push(person);
-	std::cout << "Added " << person->mName << " to " << mName << std::endl;
 }
 
 void Person::addToUnfriend(Person* person)

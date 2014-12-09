@@ -12,8 +12,6 @@ int main()
 	Person* j = new Person("J");
 	Person* a = new Person("A");
 	Person* s = new Person("S");
-	Person* e = new Person("E");
-	Person* g = new Person("G");
 	Person* k = new Person("K");
 	Person* i = new Person("I");
 
