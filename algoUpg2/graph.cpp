@@ -58,7 +58,7 @@ void Graph::moveToNextElement()
 		drawGraph(mPerson);		
 	}
 }
-
+/*DIS SHIZZ IS MAGIC YO*/
 void Graph::moveToNextLevel()
 {
 	if(!nextLevelUnfriends.empty())

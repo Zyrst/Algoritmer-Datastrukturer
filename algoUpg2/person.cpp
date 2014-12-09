@@ -62,6 +62,8 @@ void Person::addToUnfriend(Person* person)
 	
 }
 
+// Just makes a copy of our queue with friends/enemies.
+// Then pops the queue while printing.
 void Person::printFriends()
 {
 	std::queue<Person*> backup = friends;
