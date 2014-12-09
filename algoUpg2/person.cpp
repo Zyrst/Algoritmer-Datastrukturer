@@ -39,18 +39,22 @@ void Person::addToUnfriend(Person* person)
 	if(person == this)
 		return;
 
-
+	// Creates a copy of the persons enemies.
+	// We will empty it in the search for a copy.
 	std::queue<Person*> tempQueue = enemies;
 
 	// We can't add the same enemies twice.
 	while(!tempQueue.empty())
 	{
+		// Takes the front item and checks if
+		// it's the same as the one we try to add.
 		if(tempQueue.front() == person)
 		{
 			return;
 		}
 		tempQueue.pop();		
 	}
+	// Apperently sir, we made an enemy.
 	enemies.push(person);
 	
 }
@@ -58,21 +62,19 @@ void Person::addToUnfriend(Person* person)
 void Person::printFriends()
 {
 	std::queue<Person*> backup = friends;
-	for (int i = 0; i < friends.size(); i++)
+	while(!backup.empty())
 	{
-		std::cout << friends.front()->mName << std::endl;	
-		friends.pop();
+		std::cout << backup.front()->mName << std::endl;	
+		backup.pop();
 	}
-	friends = backup;
 }
 
 void Person::printEnemies()
 {
 	std::queue<Person*> backup = enemies;
-	for (int i = 0; i < enemies.size(); i++)
+	while(!backup.empty()) 
 	{
-		std::cout << enemies.front()->mName << std::endl;
-		enemies.pop();
+		std::cout << backup.front()->mName << std::endl;
+		backup.pop();
 	}
-	enemies = backup;
 }
