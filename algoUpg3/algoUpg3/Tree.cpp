@@ -84,7 +84,6 @@ void Tree::printTrees(std::string &bitString) const
 		else 
 			mTree = this->right;
 		z++;
-		// Inte tagit från Mattias nej då
 		while (z < bitString.size())
 		{
 			if(mTree->mChar == zero)
@@ -98,7 +97,7 @@ void Tree::printTrees(std::string &bitString) const
 			}
 			if (mTree->mChar != zero)
 			{
-				std::cout << mTree->mChar << std::endl;
+				std::cout << mTree->mChar;
 				z++;
 				if(bitString[z] == one)
 				{
