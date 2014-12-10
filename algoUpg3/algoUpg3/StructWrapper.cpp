@@ -2,6 +2,6 @@ struct TreeWrapper
 {
 	TreeWrapper() 
 	{
-		tree = NULL;
+		tree = nullptr;
 	}
 };

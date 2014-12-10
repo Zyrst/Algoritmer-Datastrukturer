@@ -1,4 +1,5 @@
 #include "Tree.h"
+#include <iostream>
 
 Tree::Tree(int w, char c_)
 {
@@ -26,7 +27,7 @@ int Tree::getWeight() const
 
 void Tree::printTree(std::vector<char> &bitString) const
 {
-	// Brint out content bitStrings
+	// Print out content bitStrings
 		//0 : a
 		//1 0 : c
 		//1 1 : b <- exempel från pdfen
@@ -35,18 +36,77 @@ void Tree::printTree(std::vector<char> &bitString) const
 		char one = '1';
 		int z = 0;
 
-		Tree* mTree = NULL;
+		Tree* mTree = nullptr;
 
 		if (bitString[z] == one)
 			mTree = this->left;
 		else 
-			mTree = this->right
+			mTree = this->right;
 		z++;
-
+		// Inte tagit från Mattias nej då
 		while (z < bitString.size())
 		{
-			// Inte tagit från Mattias nej då
-		}
+			if(mTree->mChar == zero)
+			{
+				if(bitString[z] == one)
+					{
+						mTree = mTree->left;
+					}
+				else 
+					mTree = mTree->right;
+			}
+			if (mTree->mChar != zero)
+			{
+				std::cout << mTree->mChar << std::endl;
+				z++;
+				if(bitString[z] == one)
+				{
+					mTree = this->left;
+				}
+				else
+					mTree = this->right;
+			}
+			z++;
+		}		
+}
 
-		
+void Tree::printTrees(std::string &bitString) const
+{
+
+		char zero = 0;
+		char one = '1';
+		int z = 0;
+
+		Tree* mTree = nullptr;
+
+		if (bitString[z] == one)
+			mTree = this->left;
+		else 
+			mTree = this->right;
+		z++;
+		// Inte tagit från Mattias nej då
+		while (z < bitString.size())
+		{
+			if(mTree->mChar == zero)
+			{
+				if(bitString[z] == one)
+					{
+						mTree = mTree->left;
+					}
+				else 
+					mTree = mTree->right;
+			}
+			if (mTree->mChar != zero)
+			{
+				std::cout << mTree->mChar << std::endl;
+				z++;
+				if(bitString[z] == one)
+				{
+					mTree = this->left;
+				}
+				else
+					mTree = this->right;
+			}
+			z++;
+		}		
 }

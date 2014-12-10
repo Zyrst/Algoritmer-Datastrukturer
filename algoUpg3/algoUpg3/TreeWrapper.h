@@ -5,7 +5,7 @@ struct TreeWrapper
 
 	TreeWrapper()
 	{
-		tree = NULL;
+		tree = nullptr;
 	}
 
 	TreeWrapper(Tree* t)

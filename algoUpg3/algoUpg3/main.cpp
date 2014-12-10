@@ -3,6 +3,7 @@
 #include <string>
 #include <iostream>
 #include <vector>
+	
 
 void createTree(std::string s, std::priority_queue<TreeWrapper> q)
 {
@@ -21,9 +22,9 @@ void createTree(std::string s, std::priority_queue<TreeWrapper> q)
 				w++;				
 			}			
 		}
-
+		std::cout << c << ": " << w << " times" << std::endl;
 		//Kollar om den redan finns i kön.
-		for (auto &k : v)
+		for (auto k : v)
 		{
 			if (k->mChar == s[i])
 			{
@@ -49,10 +50,29 @@ void createTree(std::string s, std::priority_queue<TreeWrapper> q)
 int main()
 {
 	std::priority_queue<TreeWrapper> q;
-	std::string input = "aaaabbbc";
-	std::getline(std::cin, input);
+	std::string input = "You shall not pass and my axe";
+	//std::getline(std::cin, input);
 
 	createTree(input, q);
+
+	//Skapa det gemensamma trädet
+	while(q.size() > 1)
+	{
+		TreeWrapper t1(q.top().tree);
+		q.pop();
+		TreeWrapper t2(q.top().tree);
+		q.pop();
+
+		TreeWrapper tempT(new Tree((t1.tree->getWeight() + t2.tree->getWeight()), t1.tree, t2.tree));
+
+	}
+
+	TreeWrapper mainTree = q.top();
+	q.pop();
+	//Kanske inte får ha en string , grej som mattias använder
+	//Annars en vector med chars
+	std::string zeros = "001100100100101110";
+	mainTree.tree->printTrees(zeros);
 
 
 	return 0;

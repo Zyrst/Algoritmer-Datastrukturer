@@ -1,4 +1,5 @@
 #include <vector>
+#include <string>
 
 class Tree
 {
@@ -8,11 +9,13 @@ public:
 	~Tree();
 	int getWeight() const;
 	void printTree(std::vector<char>& bitString) const;
+	void printTrees(std::string& bitString) const;
+	char mChar;
 	
 private: 
 	Tree* left;
 	Tree* right;
 	int mWeight;
-	char mChar;
+	
 	
 };
