@@ -18,9 +18,10 @@ int main()
 	// Making the graph.
 	j->addToUnfriend(a);
 	a->addToUnfriend(s);
-	a->addToUnfriend(i);
-	i->addToUnfriend(s);
 	s->addToUnfriend(k);
+	s->addToUnfriend(i);
+	k->addToUnfriend(i);
+	i->addToUnfriend(j);
 	
 	// j is the root here.
 	graph->drawGraph(j);
