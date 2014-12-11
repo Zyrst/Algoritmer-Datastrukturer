@@ -28,10 +28,16 @@ int moreComplex(int i)
 
 int main()
 {
-	int numb = 20;
+	int numb = 500;
 
 	for(int i = 0; i <= numb; i++)
 		v.push_back(-1);
 
+
 	std::cout <<  moreComplex(numb);
+
+	getchar();
+
+	std::cout << trivial(numb);
+	
 }
