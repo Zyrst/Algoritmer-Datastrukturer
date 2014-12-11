@@ -24,7 +24,7 @@ std::priority_queue<TreeWrapper> createTree(std::string s, std::priority_queue<T
 		}
 		
 		//Kollar om den redan finns i kön.
-		for (auto k : v)
+		for (auto& k : v)
 		{
 			if (k->mChar == s[i])
 			{
@@ -40,11 +40,6 @@ std::priority_queue<TreeWrapper> createTree(std::string s, std::priority_queue<T
 			
 		}			
 	}
-	/*for (auto i : v)
-	{
-		q.push(i);
-		
-	}*/
 	//Skapa det gemensamma trädet
 	while (q.size() > 1)
 	{
@@ -66,20 +61,41 @@ std::priority_queue<TreeWrapper> createTree(std::string s, std::priority_queue<T
 int main()
 {
 	std::priority_queue<TreeWrapper> q;
-	std::string input = "Theyshallnevercomprhenedthegloryofourfallenbrothersfortheyarethousaviours";
+	std::string input = "awdpjanwagoihawe";
 	//std::getline(std::cin, input);
 	q = createTree(input, q);
-
-	
 	
 
 	TreeWrapper mainTree = q.top();
 	q.pop();
 	//Kanske inte får ha en string , grej som mattias använder
 	//Annars en vector med chars
-	std::string zeros = "0001110101101010101110100011101111001010111000101000010110";
+	std::string zeros = "00011101001";
 	mainTree.tree->printTrees(zeros);
+	/*std::vector<char> letters;
+	/*for(int i = 0; i < 30; i++)
+	{
+		int num = rand() % 50 + 1;
+		if (num % 2 == 0) 
+			letters.push_back('0');
+		else 
+			letters.push_back('1');
 
+	}
+
+	letters.push_back('0');
+	letters.push_back('0');
+	letters.push_back('0');
+	letters.push_back('1');
+	letters.push_back('1');
+	letters.push_back('1');
+	letters.push_back('0');
+	letters.push_back('1');
+	letters.push_back('0');
+	letters.push_back('0');
+	letters.push_back('1');
+
+	mainTree.tree->printTree(letters);*/
 	getchar();
 	return 0;
 }

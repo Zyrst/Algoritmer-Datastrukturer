@@ -36,37 +36,59 @@ void Tree::printTree(std::vector<char> &bitString) const
 		char one = '1';
 		int z = 0;
 
-		Tree* mTree = nullptr;
+		Tree* mTree = NULL;
 
 		if (bitString[z] == one)
-			mTree = this->left;
-		else 
+		{
 			mTree = this->right;
+			std::cout << '1';
+		}
+		else 
+		{
+			mTree = this->right;
+			std::cout << '0';
+		}
 		z++;
-		// Inte tagit från Mattias nej då
+	
+
 		while (z < bitString.size())
 		{
 			if(mTree->mChar == zero)
 			{
 				if(bitString[z] == one)
 					{
-						mTree = mTree->left;
+						mTree = this->right;
+						std::cout << '1';
+						z++;
 					}
 				else 
-					mTree = mTree->right;
+				{
+					mTree = this->left;
+					std::cout << '0';
+					z++;
+				}
 			}
 			if (mTree->mChar != zero)
 			{
-				std::cout << mTree->mChar << std::endl;
+				std::cout << ": " << mTree->mChar << std::endl;
 				z++;
+				if(z >= bitString.size())
+				{
+					break;
+				}
 				if(bitString[z] == one)
 				{
-					mTree = this->left;
+					mTree = this->right;
+					std::cout << '1';
+					z++;
 				}
 				else
+				{
 					mTree = this->right;
+					std::cout << '0';
+					z++;
+				}
 			}
-			z++;
 		}		
 }
 
@@ -77,35 +99,34 @@ void Tree::printTrees(std::string &bitString) const
 		char one = '1';
 		int z = 0;
 
-		Tree* mTree = nullptr;
+		Tree* mTree = NULL;
 
 		if (bitString[z] == one)
-			mTree = this->left;
-		else 
 			mTree = this->right;
+		else 
+			mTree = this->left;
+
 		z++;
+
 		while (z < bitString.size())
 		{
 			if(mTree->mChar == zero)
 			{
 				if(bitString[z] == one)
-					{
-						mTree = mTree->left;
-					}
-				else 
 					mTree = mTree->right;
+				else 
+					mTree = mTree->left;
 			}
 			if (mTree->mChar != zero)
 			{
 				std::cout << mTree->mChar;
 				z++;
+
 				if(bitString[z] == one)
-				{
-					mTree = this->left;
-				}
-				else
 					mTree = this->right;
+				else
+					mTree = this->left;
 			}
 			z++;
 		}		
-}
+}	

@@ -1,6 +1,6 @@
 #Makefile för mig i linux
 
-OBJECTS = main.o 
+OBJECTS = main.o Tree.o
 
 EXEC = upg3
 
