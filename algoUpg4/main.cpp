@@ -22,7 +22,6 @@ int moreComplex(int i)
 	else{
 		if(v[i] == -1)
 			v[i] = moreComplex(i - 1) + moreComplex(i/2) + i;
-		std::cout << v[i];
 	}	
 	return v[i];
 }
@@ -31,8 +30,8 @@ int main()
 {
 	int numb = 20;
 
-	for(int i = 0; i < numb; i++)
+	for(int i = 0; i <= numb; i++)
 		v.push_back(-1);
 
-	return moreComplex(numb);
+	std::cout <<  moreComplex(numb);
 }
