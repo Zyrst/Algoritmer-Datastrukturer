@@ -1,11 +1,15 @@
 #include <iostream>
 
-int fibonacci(int i)
+
+
+int trivial(int i)
 {
-	if(i <= 2)
+	if(i = 1)
 		return 1;
 	else
-		return fibonacci(i - 1) + fibonacci (i - 2);
+	{
+		return(trivial(i - 1) + trivial((i/2) + 1);
+	}
 }
 
 
