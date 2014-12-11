@@ -1,6 +1,10 @@
 #include "Tree.h"
 #include <iostream>
 
+/*TODO 
+Få att den inte printar massa A i char vector*/
+
+
 Tree::Tree(int w, char c_)
 {
 	mWeight = w;
@@ -31,7 +35,7 @@ void Tree::printTree(std::vector<char> &bitString) const
 		//0 : a
 		//1 0 : c
 		//1 1 : b <- exempel från pdfen
-
+	std::cout << "Size of bitstring: " << bitString.size()<< std::endl;
 		char zero = 0;
 		char one = '1';
 		int z = 0;
@@ -40,8 +44,8 @@ void Tree::printTree(std::vector<char> &bitString) const
 
 		if (bitString[z] == one)
 		{
-			mTree = this->right;
-			std::cout << '1';
+			mTree = this->left;
+			std::cout << '1'; 
 		}
 		else 
 		{
@@ -57,15 +61,13 @@ void Tree::printTree(std::vector<char> &bitString) const
 			{
 				if(bitString[z] == one)
 					{
-						mTree = this->right;
+						mTree = this->left;
 						std::cout << '1';
-						z++;
 					}
 				else 
 				{
-					mTree = this->left;
+					mTree = this->right;
 					std::cout << '0';
-					z++;
 				}
 			}
 			if (mTree->mChar != zero)
@@ -78,17 +80,17 @@ void Tree::printTree(std::vector<char> &bitString) const
 				}
 				if(bitString[z] == one)
 				{
-					mTree = this->right;
+					mTree = this->left;
 					std::cout << '1';
-					z++;
+
 				}
 				else
 				{
 					mTree = this->right;
 					std::cout << '0';
-					z++;
 				}
 			}
+			z++;
 		}		
 }
 
@@ -102,9 +104,14 @@ void Tree::printTrees(std::string &bitString) const
 		Tree* mTree = NULL;
 
 		if (bitString[z] == one)
-			mTree = this->right;
+		{
+			mTree = this->left; std::cout << "1";
+		}
 		else 
-			mTree = this->left;
+		{ 
+			mTree = this->right;
+			std::cout << "0";
+		}
 
 		z++;
 
@@ -112,20 +119,28 @@ void Tree::printTrees(std::string &bitString) const
 		{
 			if(mTree->mChar == zero)
 			{
-				if(bitString[z] == one)
-					mTree = mTree->right;
-				else 
-					mTree = mTree->left;
+				if (bitString[z] == one)
+				{
+					mTree = mTree->left; std::cout << "1";
+				}
+				else
+				{
+					mTree = mTree->right; std::cout << "0";
+				}
 			}
 			if (mTree->mChar != zero)
 			{
-				std::cout << mTree->mChar;
+				std::cout << mTree->mChar << std::endl;
 				z++;
 
 				if(bitString[z] == one)
-					mTree = this->right;
+				{ 
+					mTree = this->left; std::cout << "1";
+				}
 				else
-					mTree = this->left;
+				{
+					mTree = this->right; std::cout << "0";
+				}
 			}
 			z++;
 		}		
