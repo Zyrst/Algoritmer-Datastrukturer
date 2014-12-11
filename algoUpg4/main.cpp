@@ -17,10 +17,10 @@ std::vector<int> v;
 
 int moreComplex(int i)
 {
-	if(i == 1)
-		v[i] = 1;
-	else{
-		if(v[i] == -1)
+	if(v[i] == -1)
+		if(i == 1)
+			v[i] == i;
+		else
 			v[i] = moreComplex(i - 1) + moreComplex(i/2) + i;
 	}	
 	return v[i];
