@@ -1,5 +1,4 @@
 #include <vector>
-#include <string>
 
 class Tree
 {
@@ -15,6 +14,4 @@ private:
 	Tree* left;
 	Tree* right;
 	int mWeight;
-	
-	
 };

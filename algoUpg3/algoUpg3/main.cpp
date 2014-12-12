@@ -3,7 +3,6 @@
 #include <string>
 #include <iostream>
 #include <vector>
-#include <time.h>
 	
 
 std::vector<Tree*> sortVector(std::vector<Tree*>v)
