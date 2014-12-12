@@ -9,7 +9,6 @@ public:
 	~Tree();
 	int getWeight() const;
 	void printTree(std::vector<char>& bitString) const;
-	void printTrees(std::string& bitString) const;
 	char mChar;
 	
 private: 
