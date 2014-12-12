@@ -32,7 +32,7 @@ std::priority_queue<TreeWrapper> createTree(std::string s, std::priority_queue<T
 	// Yttre loop där vi skapar grunden för vår trädgrej.
 	for (int i = 0; i < s.size(); i++)
 	{
-		int		freq = 0;
+		int	freq = 0;
 		// Inre loopen där vi letar upp kopior.
 			for (int j = i + 1; j < s.size(); j++)
 			{
@@ -93,7 +93,7 @@ int main()
 	TreeWrapper mainTree = q.top();
 	q.pop();
 	
-	//Pseudo-Random vector with 1 or zero
+	//Pseudo-Random vector med ettor och nollor
 	std::vector<char> letters;
 	for(int i = 0; i < 20; i++)
 	{

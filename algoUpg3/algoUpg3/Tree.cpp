@@ -32,6 +32,8 @@ void Tree::printTree(std::vector<char> &bitString) const
 
 	Tree* mTree = NULL;
 
+	//Se vad första tecknet är
+	//Gå sedan rätt håll i trädet
 	if (bitString[z] == one)
 	{
 		mTree = this->left; 
@@ -47,6 +49,7 @@ void Tree::printTree(std::vector<char> &bitString) const
 
 	while (z < bitString.size())
 	{
+		//Inte kommit till ett löv
 		if(mTree->mChar == zero)
 		{
 			if (bitString[z] == one)
@@ -60,18 +63,23 @@ void Tree::printTree(std::vector<char> &bitString) const
 				std::cout << "0";
 			}
 		}
+		//Kommit till ett löv
+		//Skriv ut tecken
 		if (mTree->mChar != zero)
 		{
 			std::cout << mTree->mChar << std::endl;
 			z++;
-
+			//Titta nästa i vectorn
+			//Gå sedan rätt håll i trädet
 			if(bitString[z] == one)
 			{ 
-				mTree = this->left; std::cout << "1";
+				mTree = this->left; 
+				std::cout << "1";
 			}
 			else
 			{
-				mTree = this->right; std::cout << "0";
+				mTree = this->right; 
+				std::cout << "0";
 			}
 		}
 		z++;
